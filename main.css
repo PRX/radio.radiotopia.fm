@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: black;
+  background-image: url('grad.png');
+  background-position: left bottom;
+  background-repeat: repeat-x;
+  width: 100vw;
+  height: 100vh;
+  -webkit-user-select: none;
+}
+
+#stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('stars.png');
+  background-size: 50% 50%;
+}
+
+#wordmark {
+  background: url('wordmark.png') no-repeat;
+  background-size: 100%;
+  margin: 0 auto;
+  border-top: 75px solid transparent;
+  width: 360px;
+  height: 200px;
+}
+
+#now-playing {
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+h3, h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  -webkit-user-select: text;
+  max-width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+#controls {
+  text-align: center;
+}
+
+#skip, #playpause {
+  color: white;
+  cursor: pointer;
+  font-size: 72px;
+  margin: 0 6px;
+  width: 63px;
+  z-index: 999;
+  position: relative;
+}
+
+#audio {
+  visibility: hidden;
+}
+
+#speed {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}
