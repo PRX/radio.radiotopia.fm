@@ -37,6 +37,7 @@ body.loading #loading {
   height: 100%;
   background-image: url('stars.png');
   background-size: 50% 50%;
+  z-index: 1;
 }
 
 #wordmark {
@@ -46,6 +47,9 @@ body.loading #loading {
   border-top: 75px solid transparent;
   width: 360px;
   height: 200px;
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
 }
 
 #now-playing {

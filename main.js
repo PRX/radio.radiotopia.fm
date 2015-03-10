@@ -112,6 +112,10 @@ $(function () {
     loadTrack();
   });
 
+  $('#wordmark').bind('click', function () {
+    window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
+  });
+
   $('#skip').bind('click', function () {
     console.log('[GA][player][skip]: ' + gaSlug());
     ga('send', 'event', 'player', 'skip', gaSlug());
