@@ -70,12 +70,12 @@ $(function () {
         a.playbackRate = 2.0;
         $('#speed').text('1x');
         console.log('[GA][player][speed]: 2x');
-        ga('send', 'event', 'player', 'seed', '2x');
+        ga('send', 'event', 'player', 'speed', '2x');
       } else {
         a.playbackRate = 1.0;
         $('#speed').text('2x');
         console.log('[GA][player][speed]: 1x');
-        ga('send', 'event', 'player', 'seed', '1x');
+        ga('send', 'event', 'player', 'speed', '1x');
       }
     });
 
