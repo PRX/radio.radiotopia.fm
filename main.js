@@ -12,8 +12,8 @@ $(function () {
 
     $('body').removeClass('loading');
 
-    var allTracks = data
-    console.log('Total tracks: ' + allTracks.length)
+    var allTracks = data;
+    console.log('Total tracks: ' + allTracks.length);
 
     var dup = allTracks.slice(0);
     var allTrackURLs = $.map(dup, function (track, i) { return track[0] });
@@ -23,12 +23,14 @@ $(function () {
     }
 
     var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
-    console.log('Played tracks: ' + playedTrackURLs.length)
+
+    console.log('[GA][app][load] Played tracks: ' + playedTrackURLs.length);
+    ga('send', 'event', 'app', 'load', 'played tracks', playedTrackURLs.length);
 
     var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i){
-      return $.inArray(trackURL, playedTrackURLs) == -1
+      return $.inArray(trackURL, playedTrackURLs) == -1;
     });
-    console.log('Remaining tracks: ' + remainingTrackURLs.length)
+    console.log('Remaining tracks: ' + remainingTrackURLs.length);
 
     var loadTrack = function () {
       if (window.currentTrackURL) {
@@ -38,7 +40,7 @@ $(function () {
 
       if (remainingTrackURLs.length == 0) {
         localStorage.playedTrackURLs = JSON.stringify([]);
-        remainingTrackURLs = allTrackURLs
+        remainingTrackURLs = allTrackURLs;
       }
 
       var rnd = Math.floor(Math.random() * remainingTrackURLs.length);
@@ -47,7 +49,7 @@ $(function () {
 
       // Find the track from its URL
       var randomTrack = $.grep(allTracks, function (track, i) {
-        return track[0] == randomTrackURL
+        return track[0] == randomTrackURL;
       })[0];
 
       window.currentTrack = randomTrack;
@@ -105,7 +107,7 @@ $(function () {
   });
 
   $('#skip').bind('click', function () {
-    console.log('[GA][player][skip]: ' + gaSlug())
+    console.log('[GA][player][skip]: ' + gaSlug());
     ga('send', 'event', 'player', 'skip', gaSlug());
   });
 });
