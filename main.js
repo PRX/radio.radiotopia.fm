@@ -57,10 +57,13 @@ var linkMap = {
 $(function () {
   $.get('https://pacific-forest-5405.herokuapp.com/enclosures/list', function(data) {
 
-    $('body').removeClass('loading');
+    //
+    //
+    // Build playlist
+    //
+    //
 
     var allTracks = data;
-    console.log('Total tracks: ' + allTracks.length);
 
     var dup = allTracks.slice(0);
     var allTrackURLs = $.map(dup, function (track, i) { return track[0] });
@@ -71,13 +74,18 @@ $(function () {
 
     var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
 
-    console.log('[GA][app][load] Played tracks: ' + playedTrackURLs.length);
-    ga('send', 'event', 'app', 'load', 'played tracks', playedTrackURLs.length);
-
     var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i){
       return $.inArray(trackURL, playedTrackURLs) == -1;
     });
-    console.log('Remaining tracks: ' + remainingTrackURLs.length);
+
+    ga('send', 'event', 'app', 'load', 'played tracks', playedTrackURLs.length);
+    console.log('[Radio] Added ' + remainingTrackURLs.length + ' of ' + allTracks.length + ' tracks to playlist.');
+
+    //
+    //
+    // Load a track, or skip the current track
+    //
+    //
 
     var loadTrack = function () {
       if (window.currentTrackURL) {
@@ -106,9 +114,45 @@ $(function () {
       $('h3').text(randomTrack[1]);
       $('h4').text(randomTrack[2]);
 
-      console.log('[GA][player][play](NI): ' + gaSlug());
       ga('send', 'event', 'player', 'play', gaSlug(), { 'nonInteraction': 1 });
     }
+
+    //
+    //
+    // Interaction bindings
+    //
+    //
+
+    $('#wordmark').bind('click', function () {
+      ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
+      window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
+    });
+
+    $('#outbound-itunes').bind('click', function (e) {
+      e.preventDefault();
+
+      var artist = window.currentTrack[2];
+      var itunes = linkMap[artist]['iTunes'];
+
+      if (itunes) {
+        ga('send', 'event', 'outbound', artist, 'iTunes');
+
+        window.open(itunes);
+      }
+    });
+
+    $('#outbound-www').bind('click', function (e) {
+      e.preventDefault();
+
+      var artist = window.currentTrack[2];
+      var www = linkMap[artist]['www'];
+
+      if (www) {
+        ga('send', 'event', 'outbound', artist, 'WWW');
+
+        window.open(www);
+      }
+    });
 
     $('#speed').bind('click', function () {
       var a = $('#audio')[0];
@@ -116,18 +160,68 @@ $(function () {
       if (a.playbackRate == 1.0) {
         a.playbackRate = 2.0;
         $('#speed').text('1x');
-        console.log('[GA][player][speed]: 2x');
+
         ga('send', 'event', 'player', 'speed', '2x');
       } else {
         a.playbackRate = 1.0;
         $('#speed').text('2x');
-        console.log('[GA][player][speed]: 1x');
+
         ga('send', 'event', 'player', 'speed', '1x');
       }
     });
 
-    $('#audio').bind('ended', function () { loadTrack(); });
-    $('#audio').bind('error', function () { loadTrack(); });
+    $('#playpause').bind('click', function () {
+      var a = $('#audio')[0]
+
+      if (a.paused) {
+        ga('send', 'event', 'player', 'play', gaSlug());
+        a.play();
+      } else {
+        ga('send', 'event', 'player', 'pause', gaSlug());
+        a.pause();
+      }
+    });
+
+    $('#skip').bind('click', function () {
+      ga('send', 'event', 'player', 'skip', gaSlug());
+
+      loadTrack();
+    });
+
+    $(document).bind('keydown', 'right', function () {
+      ga('send', 'event', 'player', 'skip', gaSlug());
+
+      loadTrack();
+    });
+
+    $(document).bind('keydown', 'space', function () {
+      var a = $('#audio')[0]
+
+      if (a.paused) {
+        ga('send', 'event', 'player', 'play', gaSlug());
+        a.play();
+      } else {
+        ga('send', 'event', 'player', 'pause', gaSlug());
+        a.pause();
+      }
+    });
+
+    //
+    //
+    // Media event bindings
+    //
+    //
+
+    $('#audio').bind('ended', function () {
+      ga('send', 'event', 'player', 'ended', gaSlug());
+      loadTrack();
+    });
+
+    $('#audio').bind('error', function () {
+      ga('send', 'event', 'player', 'error', gaSlug());
+      loadTrack();
+    });
+
     $('#audio').bind('pause play', function () {
       $('#playpause').removeClass();
       $('#playpause').addClass('fa');
@@ -140,81 +234,13 @@ $(function () {
       }
     });
 
-    $('#skip').bind('click', function () { loadTrack(); });
+    //
+    //
+    // Start the radio
+    //
+    //
 
-    $(document).bind('keydown', 'right', function () {
-      loadTrack();
-      
-      console.log('[GA][player][skip]: ' + gaSlug());
-      ga('send', 'event', 'player', 'skip', gaSlug());
-    });
-
-    $('#playpause').bind('click', function () {
-      var a = $('#audio')[0]
-
-      if (a.paused) {
-        a.play();
-        console.log('[GA][player][play]: ' + gaSlug())
-        ga('send', 'event', 'player', 'play', gaSlug());
-      } else {
-        a.pause();
-        console.log('[GA][player][pause]: ' + gaSlug())
-        ga('send', 'event', 'player', 'pause', gaSlug());
-      }
-    });
-
+    $('body').removeClass('loading');
     loadTrack();
-  });
-
-  $('#wordmark').bind('click', function () {
-    console.log('[GA][outbound][radiotopia.fm]');
-    ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
-    window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
-  });
-
-  $('#skip').bind('click', function () {
-    console.log('[GA][player][skip]: ' + gaSlug());
-    ga('send', 'event', 'player', 'skip', gaSlug());
-  });
-
-  $('#outbound-itunes').bind('click', function (e) {
-    e.preventDefault();
-
-    var artist = window.currentTrack[2];
-    var itunes = linkMap[artist]['iTunes'];
-
-    if (itunes) {
-      console.log('[GA][outbound][' + artist + ']: iTunes');
-      ga('send', 'event', 'outbound', artist, 'iTunes');
-
-      window.open(itunes);
-    }
-  });
-
-  $('#outbound-www').bind('click', function (e) {
-    e.preventDefault();
-
-    var artist = window.currentTrack[2];
-    var www = linkMap[artist]['www'];
-    if (www) {
-      console.log('[GA][outbound][' + artist + ']: WWW');
-      ga('send', 'event', 'outbound', artist, 'WWW');
-
-      window.open(www);
-    }
-  });
-
-  $(document).bind('keydown', 'space', function () {
-    var a = $('#audio')[0]
-
-    if (a.paused) {
-      a.play();
-      console.log('[GA][player][play]: ' + gaSlug())
-      ga('send', 'event', 'player', 'play', gaSlug());
-    } else {
-      a.pause();
-      console.log('[GA][player][pause]: ' + gaSlug())
-      ga('send', 'event', 'player', 'pause', gaSlug());
-    }
   });
 });
