@@ -9,6 +9,26 @@ body {
   width: 100vw;
   height: 100vh;
   -webkit-user-select: none;
+  position: relative;
+}
+
+body #loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+}
+
+body.loading #loading {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 #stars {
@@ -62,7 +82,7 @@ h3 {
   font-size: 72px;
   margin: 0 6px;
   width: 63px;
-  z-index: 999;
+  z-index: 50;
   position: relative;
 }
 

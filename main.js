@@ -1,5 +1,16 @@
+var gaSlug = function () {
+  var title = window.currentTrack[1];
+  var artist = window.currentTrack[2];
+
+  var slug = artist + ' - ' + title;
+
+  return slug;
+};
+
 $(function () {
   $.get('https://pacific-forest-5405.herokuapp.com/enclosures/list', function(data) {
+
+    $('body').removeClass('loading');
 
     var allTracks = data
     console.log('Total tracks: ' + allTracks.length)
@@ -39,11 +50,15 @@ $(function () {
         return track[0] == randomTrackURL
       })[0];
 
+      window.currentTrack = randomTrack;
+
       $('#audio').attr('src', randomTrack[0]);
       $('#audio')[0].play();
       $('h3').text(randomTrack[1]);
       $('h4').text(randomTrack[2]);
-      console.log('Playing: "' + randomTrack[1] + '", ' + randomTrack[2])
+
+      console.log('[GA][player][play](NI): ' + gaSlug())
+      ga('send', 'event', 'player', 'play', gaSlug(), { 'nonInteraction': 1 });
     }
 
     $('#speed').bind('click', function () {
@@ -77,11 +92,20 @@ $(function () {
 
       if (a.paused) {
         a.play();
+        console.log('[GA][player][play]: ' + gaSlug())
+        ga('send', 'event', 'player', 'play', gaSlug());
       } else {
         a.pause();
+        console.log('[GA][player][pause]: ' + gaSlug())
+        ga('send', 'event', 'player', 'pause', gaSlug());
       }
     });
 
     loadTrack();
+  });
+
+  $('#skip').bind('click', function () {
+    console.log('[GA][player][skip]: ' + gaSlug())
+    ga('send', 'event', 'player', 'skip', gaSlug());
   });
 });
