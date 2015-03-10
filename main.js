@@ -160,6 +160,8 @@ $(function () {
   });
 
   $('#wordmark').bind('click', function () {
+    console.log('[GA][outbound][radiotopia.fm]');
+    ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
     window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
   });
 
