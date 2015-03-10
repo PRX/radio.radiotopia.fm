@@ -7,6 +7,53 @@ var gaSlug = function () {
   return slug;
 };
 
+var linkMap = {
+  'Criminal': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/criminal/id809264944?at=10l9zE',
+    'www': 'http://thisiscriminal.com/',
+  },
+  'The Truth': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-truth/id502304410?at=10l9zE',
+    'www': 'http://thetruthpodcast.com/',
+  },
+  'The Mortified Podcast': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-mortified-podcast/id964902342?at=10l9zE',
+    'www': 'http://getmortified.com/',
+  },
+  'The Heart': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/audio-smut/id595892633?at=10l9zE',
+    'www': 'http://theheartradio.org/',
+  },
+  'Fugitive Waves': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/fugitive-waves/id814067846?at=10l9zE',
+    'www': 'http://www.kitchensisters.org/',
+  },
+  'Love + Radio': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/love-+-radio/id84389707?at=10l9zE',
+    'www': 'http://loveandradio.org/',
+  },
+  '99% Invisible': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/99-invisible/id394775318?at=10l9zE',
+    'www': 'http://99percentinvisible.org/',
+  },
+  'Strangers': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/strangers/id490297492?at=10l9zE',
+    'www': 'http://storycentral.org/',
+  },
+  'Radio Diaries': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/npr-radio-diaries-podcast/id207505466?at=10l9zE',
+    'www': 'http://www.radiodiaries.org/',
+  },
+  "Benjamen Walker's Theory of Everything": {
+    'iTunes': 'https://itunes.apple.com/us/podcast/benjamen-walkers-theory-everything/id646537599?at=10l9zE',
+    'www': 'http://toe.prx.org/',
+  },
+  'The Allusionist': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-allusionist/id957430475?at=10l9zE',
+    'www': 'http://www.theallusionist.org/',
+  },
+};
+
 $(function () {
   $.get('https://pacific-forest-5405.herokuapp.com/enclosures/list', function(data) {
 
@@ -119,5 +166,32 @@ $(function () {
   $('#skip').bind('click', function () {
     console.log('[GA][player][skip]: ' + gaSlug());
     ga('send', 'event', 'player', 'skip', gaSlug());
+  });
+
+  $('#outbound-itunes').bind('click', function (e) {
+    e.preventDefault();
+
+    var artist = window.currentTrack[2];
+    var itunes = linkMap[artist]['iTunes'];
+
+    if (itunes) {
+      console.log('[GA][outbound][' + artist + ']: iTunes');
+      ga('send', 'event', 'outbound', artist, 'iTunes');
+
+      window.open(itunes);
+    }
+  });
+
+  $('#outbound-www').bind('click', function (e) {
+    e.preventDefault();
+
+    var artist = window.currentTrack[2];
+    var www = linkMap[artist]['www'];
+    if (www) {
+      console.log('[GA][outbound][' + artist + ']: WWW');
+      ga('send', 'event', 'outbound', artist, 'WWW');
+
+      window.open(www);
+    }
   });
 });
