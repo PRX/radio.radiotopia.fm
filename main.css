@@ -121,4 +121,5 @@ h3 {
   font-family: 'Open Sans', sans-serif;
   color: rgba(255, 255, 255, 0.17);
   text-align: center;
+  z-index: 20;
 }
