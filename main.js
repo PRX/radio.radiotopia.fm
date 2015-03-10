@@ -59,7 +59,7 @@ $(function () {
       $('h3').text(randomTrack[1]);
       $('h4').text(randomTrack[2]);
 
-      console.log('[GA][player][play](NI): ' + gaSlug())
+      console.log('[GA][player][play](NI): ' + gaSlug());
       ga('send', 'event', 'player', 'play', gaSlug(), { 'nonInteraction': 1 });
     }
 
@@ -68,8 +68,14 @@ $(function () {
 
       if (a.playbackRate == 1.0) {
         a.playbackRate = 2.0;
+        $('#speed').text('1x');
+        console.log('[GA][player][speed]: 2x');
+        ga('send', 'event', 'player', 'seed', '2x');
       } else {
         a.playbackRate = 1.0;
+        $('#speed').text('2x');
+        console.log('[GA][player][speed]: 1x');
+        ga('send', 'event', 'player', 'seed', '1x');
       }
     });
 

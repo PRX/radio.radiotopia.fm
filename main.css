@@ -92,8 +92,11 @@ h3 {
 
 #speed {
   width: 50px;
-  height: 50px;
+  height: 30px;
   position: absolute;
   bottom: 0;
   cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  color: rgba(255, 255, 255, 0.17);
+  text-align: center;
 }
