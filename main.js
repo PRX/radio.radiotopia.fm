@@ -142,6 +142,13 @@ $(function () {
 
     $('#skip').bind('click', function () { loadTrack(); });
 
+    $(document).bind('keydown', 'right', function () {
+      loadTrack();
+      
+      console.log('[GA][player][skip]: ' + gaSlug());
+      ga('send', 'event', 'player', 'skip', gaSlug());
+    });
+
     $('#playpause').bind('click', function () {
       var a = $('#audio')[0]
 
@@ -194,6 +201,20 @@ $(function () {
       ga('send', 'event', 'outbound', artist, 'WWW');
 
       window.open(www);
+    }
+  });
+
+  $(document).bind('keydown', 'space', function () {
+    var a = $('#audio')[0]
+
+    if (a.paused) {
+      a.play();
+      console.log('[GA][player][play]: ' + gaSlug())
+      ga('send', 'event', 'player', 'play', gaSlug());
+    } else {
+      a.pause();
+      console.log('[GA][player][pause]: ' + gaSlug())
+      ga('send', 'event', 'player', 'pause', gaSlug());
     }
   });
 });
