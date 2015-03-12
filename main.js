@@ -55,7 +55,7 @@ var linkMap = {
 };
 
 $(function () {
-  $.get('https://pacific-forest-5405.herokuapp.com/enclosures/list', function(data) {
+  $.get('https://prx-radiotopia-tower.herokuapp.com/enclosures/list', function(data) {
 
     //
     //
