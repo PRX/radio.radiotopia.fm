@@ -55,7 +55,7 @@ var linkMap = {
 };
 
 $(function () {
-  $.get('https://prx-radiotopia-tower.herokuapp.com/enclosures/list', function(data) {
+  $.get('http://tower.radiotopia.fm/enclosures/list', function(data) {
 
     //
     //
