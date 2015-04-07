@@ -240,7 +240,7 @@ $(function () {
     //
     //
 
-    $('body').removeClass('loading');
+    $('body').removeClass('isLoading');
     loadTrack();
   });
 });

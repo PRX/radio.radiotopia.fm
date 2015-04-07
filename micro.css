@@ -1,0 +1,36 @@
+@media only screen and (max-width: 320px), only screen and (max-height: 568px) {
+  h1 {
+    margin: 15px 0 0 0;
+  }
+
+  h2 {
+    display: none;
+  }
+
+  h3 {
+    font-size: 18px;
+    padding: 0 0 6px;
+  }
+
+  #control {
+
+  }
+
+  #outbound {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 220px), only screen and (max-height: 250px) {
+  h1 {
+    height: 40px;
+  }
+
+  h3 {
+    display: none;
+  }
+
+  h4 {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+@media only screen and (min-width: 414px) and (max-height: 736px) and (orientation : landscape) {
+  h1 {
+    margin: 20px 0 0 0;
+    height: 75px;
+  }
+
+  h2 {
+    display: none;
+  }
+
+  h3 {
+    font-size: 24px;
+    padding: 0 0 5px 0;
+  }
+
+  #controls {
+    padding-top: 5px;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-height: 736px) and (orientation : portrait) {
+  h1 {
+    height: 90px;
+  }
+}

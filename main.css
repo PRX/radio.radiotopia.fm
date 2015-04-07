@@ -1,23 +1,29 @@
-body {
+* {
   margin: 0;
   border: 0;
   padding: 0;
+}
+
+body {
+  color: white;
   background-color: black;
-  background-image: url('grad.png');
-  background-position: left bottom;
-  background-repeat: repeat-x;
+  background-image: url('stars.png'), url('grad.png');
+  background-position: top left, left bottom;
+  background-repeat: repeat, repeat-x;
+  background-size: 50% 50%, auto, auto;
   width: 100vw;
   height: 100vh;
   -webkit-user-select: none;
   position: relative;
+  font-family: 'Open Sans', sans-serif;
 }
 
-body #loading {
+#loading {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
   visibility: hidden;
@@ -25,101 +31,119 @@ body #loading {
   transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
-body.loading #loading {
+.isLoading #loading {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
 }
 
-#stars {
-  position: absolute;
+main {
+  display: flex;
+  display: -webkit-flex;
   width: 100%;
   height: 100%;
-  background-image: url('stars.png');
-  background-size: 50% 50%;
-  z-index: 1;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  position: relative
 }
 
-#wordmark {
-  background: url('wordmark.png') no-repeat;
-  background-size: 100%;
-  margin: 0 auto;
-  border-top: 75px solid transparent;
-  width: 360px;
-  height: 200px;
-  cursor: pointer;
-  z-index: 10;
-  position: relative;
-}
-
-#now-playing {
-  text-transform: uppercase;
-  color: white;
+h1 {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-image: url('wordmark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 75px 0 0 0;
+  height: 125px;
+}
+
+h2 {
+  text-transform: uppercase;
   font-weight: 400;
   font-size: 16px;
 }
 
-h3, h4 {
-  font-family: 'Open Sans', sans-serif;
+h3,
+h4 {
   font-weight: 400;
-  text-align: center;
-  color: white;
   -webkit-user-select: text;
   max-width: 75%;
-  margin-right: auto;
-  margin-left: auto;
+  text-align: center;
 }
 
 h3 {
   font-size: 28px;
+  padding: 25px 0;
 }
 
 #controls {
-  text-align: center;
+  padding: 25px 0 0;
 }
 
-#skip, #playpause {
-  color: white;
+#skip,
+#playpause {
   cursor: pointer;
   font-size: 72px;
   margin: 0 6px;
-  width: 63px;
   z-index: 50;
-  position: relative;
+  text-align: center;
+}
+
+#playpause {
+  width: 1em;
 }
 
 #outbound {
-  font-family: 'Open Sans', sans-serif;
-  color: rgba(255, 255, 255, 0.33);
-  text-align: center;
-  padding: 10px 0 0 0;
+  opacity: 0.33;
+  padding: 10px 0 0;
 }
 
 #outbound a {
   text-decoration: none;
   color: inherit;
-  position: relative;
-  z-index: 15;
   display: inline-block;
   padding: 0 6px;
   font-size: 12px;
   cursor: pointer;
 }
 
-#audio {
-  visibility: hidden;
+#speed {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 12px 16px;
+  cursor: pointer;
+  opacity: 0.17;
+  z-index: 20;
 }
 
-#speed {
-  width: 50px;
-  height: 30px;
+#twitter {
   position: absolute;
+  right: 0;
   bottom: 0;
+  padding: 12px 16px;
   cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  color: rgba(255, 255, 255, 0.17);
-  text-align: center;
+  opacity: 0.9;
   z-index: 20;
+  font-size: 36px;
+}
+
+audio {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
 }
