@@ -64,8 +64,9 @@ h1 {
   top: 0;
   left: 0;
   right: 0;
-  margin: 75px 0 0 0;
+  margin: 75px auto 0;
   height: 125px;
+  max-width: 60%;
 }
 
 h2 {
@@ -146,4 +147,49 @@ audio {
   height: 0;
   top: 0;
   left: 0;
+}
+
+@media only screen and (max-width: 450px) {
+  #outbound { display: none; }
+}
+
+@media only screen and (max-width: 320px) {
+  #twitter { display: none; }
+}
+
+@media only screen and (max-height: 736px) {
+  h1 { height: 100px; margin-top: 60px; }
+}
+
+@media only screen and (max-height: 600px) {
+  h2 { display: none; }
+}
+
+@media only screen and (max-height: 550px) {
+  h1 { height: 80px; margin-top: 50px }
+  h3 { padding: 5px 0; font-size: 24px; }
+}
+
+@media only screen and (max-height: 500px) {
+  h1 { height: 70px; margin-top: 30px }
+}
+
+@media only screen and (max-height: 450px) {
+  h3 { font-size: 18px; }
+  h4 { font-size: 13px; }
+  #controls { padding: 5px 0; }
+  #playpause, #skip { font-size: 48px; }
+}
+
+@media only screen and (max-height: 330px) {
+  h1 { opacity: 0.3 }
+}
+
+@media only screen and (max-height: 230px) {
+  #twitter { display: none; }
+}
+
+@media only screen and (max-height: 150px),
+only screen and (max-width: 150px) {
+  h3, h4, #skip, #speed { display: none; }
 }
