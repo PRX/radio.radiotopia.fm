@@ -123,7 +123,7 @@ $(function () {
     //
     //
 
-    $('#wordmark').bind('click', function () {
+    $('h1').bind('click', function () {
       ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
       window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
     });
