@@ -67,6 +67,7 @@ h1 {
   margin: 75px auto 0;
   height: 125px;
   max-width: 60%;
+  cursor: pointer;
 }
 
 h2 {
