@@ -217,6 +217,13 @@ $(function () {
       loadTrack();
     });
 
+    $('#audio').bind('timeupdate', function () {
+      var a = $('#audio')[0];
+      var progress = (a.currentTime / a.duration);
+
+      $('#progress').css('width', progress * 100 + '%')
+    });
+
     $('#audio').bind('error', function () {
       ga('send', 'event', 'player', 'error', gaSlug());
       loadTrack();

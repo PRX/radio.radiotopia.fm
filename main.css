@@ -130,6 +130,15 @@ h3 {
   z-index: 20;
 }
 
+#progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: rgba(255, 255, 255, 0.667);
+}
+
 #twitter {
   position: absolute;
   right: 0;
