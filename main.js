@@ -88,9 +88,14 @@ $(function () {
     //
 
     var loadTrack = function () {
+      $('#progress').css('width', 0);
+
       if (window.currentTrackURL) {
-        playedTrackURLs.push(window.currentTrackURL);
-        localStorage.playedTrackURLs = JSON.stringify(playedTrackURLs);
+        var a = $('#audio')[0];
+        if (a.currentTime > 2.0) {
+          playedTrackURLs.push(window.currentTrackURL);
+          localStorage.playedTrackURLs = JSON.stringify(playedTrackURLs);
+        }
       }
 
       if (remainingTrackURLs.length == 0) {
@@ -221,7 +226,7 @@ $(function () {
       var a = $('#audio')[0];
       var progress = (a.currentTime / a.duration);
 
-      $('#progress').css('width', progress * 100 + '%')
+      $('#progress').css('width', progress * 100 + '%');
     });
 
     $('#audio').bind('error', function () {
