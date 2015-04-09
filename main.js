@@ -72,13 +72,27 @@ $(function () {
       localStorage.playedTrackURLs = JSON.stringify([]);
     }
 
+    // Get any tracks from the last couple of days
+    var now = Date.now();
+    var yesterday = now - (2 * 24 * 60 * 60 * 1000);
+
+    var newTracks = $.grep(allTracks, function (track, i) {
+      var pubDate = Date.parse(track[3]);
+      return pubDate > yesterday;
+    });
+
+    var newTrackURLs = $.map(newTracks, function (track, i) { return track[0] });
+
+    // Get the list of already played tracks from local stoage
     var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
 
-    var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i){
+    // Construct a list of unheard tracks
+    var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i) {
       return $.inArray(trackURL, playedTrackURLs) == -1;
     });
 
     ga('send', 'event', 'app', 'load', 'played tracks', playedTrackURLs.length);
+    console.log('[Radio] Found ' + newTrackURLs.length + ' new tracks to be played first.')
     console.log('[Radio] Added ' + remainingTrackURLs.length + ' of ' + allTracks.length + ' tracks to playlist.');
 
     //
@@ -92,19 +106,44 @@ $(function () {
 
       if (window.currentTrackURL) {
         var a = $('#audio')[0];
-        if (a.currentTime > 2.0) {
+
+        // Don't treat the outgoing track as heard if it just loaded
+        if (a.currentTime > 1.3) {
           playedTrackURLs.push(window.currentTrackURL);
           localStorage.playedTrackURLs = JSON.stringify(playedTrackURLs);
+
+          // Remove the played (or skipped) track from the lists
+          var rIndex = remainingTrackURLs.indexOf(window.currentTrackURL);
+          if (rIndex > -1) {
+            console.log('[Radio] Removing track from playlist.')
+            remainingTrackURLs.splice(rIndex, 1);
+          }
+
+          var nIndex = newTrackURLs.indexOf(window.currentTrackURL);
+          if (nIndex > -1) {
+            console.log('[Radio] Removing track from new tracks list.')
+            newTrackURLs.splice(nIndex, 1);
+          }
+
+          console.log('[Radio] ' + remainingTrackURLs.length + ' tracks remaining in playlist.')
         }
       }
 
+      // Reset the list if there's nothing else to play
       if (remainingTrackURLs.length == 0) {
         localStorage.playedTrackURLs = JSON.stringify([]);
         remainingTrackURLs = allTrackURLs;
       }
 
+      // Pick a random track from those remaining
       var rnd = Math.floor(Math.random() * remainingTrackURLs.length);
       var randomTrackURL = remainingTrackURLs[rnd];
+
+      // If there are any remaining new tracks, play those before a random track
+      if (newTrackURLs.length > 0) {
+        randomTrackURL = newTrackURLs[0];
+      }
+
       window.currentTrackURL = randomTrackURL;
 
       // Find the track from its URL
