@@ -195,7 +195,7 @@ $(function () {
       if (www) {
         ga('send', 'event', 'outbound', artist, 'WWW');
 
-        window.open(www);
+        window.open(www + '?utm_source=radio&utm_medium=logo&utm_campaign=radio');
       }
     });
 
