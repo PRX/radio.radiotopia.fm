@@ -141,7 +141,8 @@ $(function () {
 
       // If there are any remaining new tracks, play those before a random track
       if (newTrackURLs.length > 0) {
-        randomTrackURL = newTrackURLs[0];
+        rnd = Math.floor(Math.random() * newTrackURLs.length);
+        randomTrackURL = newTrackURLs[rnd];
       }
 
       window.currentTrackURL = randomTrackURL;
