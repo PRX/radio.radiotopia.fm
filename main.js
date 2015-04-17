@@ -72,19 +72,21 @@ $(function () {
       localStorage.playedTrackURLs = JSON.stringify([]);
     }
 
+    // Get the list of already played tracks from local stoage
+    var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
+
     // Get any tracks from the last couple of days
     var now = Date.now();
     var yesterday = now - (2 * 24 * 60 * 60 * 1000);
 
+    // Make a separate list of unheard tracks from the last two days
     var newTracks = $.grep(allTracks, function (track, i) {
       var pubDate = Date.parse(track[3]);
-      return pubDate > yesterday;
+      // return (pubDate > yesterday);
+      return (pubDate > yesterday) && ($.inArray(track[0], playedTrackURLs) == -1);
     });
 
     var newTrackURLs = $.map(newTracks, function (track, i) { return track[0] });
-
-    // Get the list of already played tracks from local stoage
-    var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
 
     // Construct a list of unheard tracks
     var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i) {
