@@ -145,6 +145,12 @@ $(function () {
         randomTrackURL = newTrackURLs[rnd];
       }
 
+      // If it got the same track try to find another one
+      if (window.currentTrackURL == randomTrackURL) {
+        rnd = Math.floor(Math.random() * remainingTrackURLs.length);
+        randomTrackURL = remainingTrackURLs[rnd];
+      }
+
       window.currentTrackURL = randomTrackURL;
 
       // Find the track from its URL
