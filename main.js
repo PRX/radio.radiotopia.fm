@@ -82,7 +82,6 @@ $(function () {
     // Make a separate list of unheard tracks from the last two days
     var newTracks = $.grep(allTracks, function (track, i) {
       var pubDate = Date.parse(track[3]);
-      // return (pubDate > yesterday);
       return (pubDate > yesterday) && ($.inArray(track[0], playedTrackURLs) == -1);
     });
 
