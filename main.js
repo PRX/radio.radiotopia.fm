@@ -44,7 +44,7 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/npr-radio-diaries-podcast/id207505466?at=10l9zE',
     'www': 'http://www.radiodiaries.org/',
   },
-  "Benjamen Walker's Theory of Everything": {
+  "Theory of Everything": {
     'iTunes': 'https://itunes.apple.com/us/podcast/benjamen-walkers-theory-everything/id646537599?at=10l9zE',
     'www': 'http://toe.prx.org/',
   },
@@ -177,6 +177,11 @@ $(function () {
       e.preventDefault();
 
       var artist = window.currentTrack[2];
+
+      if (artist.indexOf('Theory of Everything') != -1) {
+        artist = 'Theory of Everything';
+      }
+
       var itunes = linkMap[artist]['iTunes'];
 
       if (itunes) {
@@ -190,6 +195,11 @@ $(function () {
       e.preventDefault();
 
       var artist = window.currentTrack[2];
+
+      if (artist.indexOf('Theory of Everything') != -1) {
+        artist = 'Theory of Everything';
+      }
+
       var www = linkMap[artist]['www'];
 
       if (www) {
