@@ -74,6 +74,7 @@ $(function () {
 
     // Get the list of already played tracks from local stoage
     var playedTrackURLs = JSON.parse(localStorage.playedTrackURLs);
+    window.playedTrackCount = playedTrackURLs.length;
 
     // Get any tracks from the last couple of days
     var now = Date.now();
@@ -160,6 +161,8 @@ $(function () {
       })[0];
 
       window.currentTrack = randomTrack;
+
+      window.playedTrackCount = playedTrackURLs.length;
 
       $('#audio').attr('src', randomTrack[0]);
       $('#audio')[0].play();
@@ -275,7 +278,8 @@ $(function () {
     //
 
     $('#audio').bind('ended', function () {
-      ga('send', 'event', 'player', 'ended', gaSlug());
+      var count = window.playedTrackCount;
+      ga('send', 'event', 'player', 'ended', gaSlug(), count);
       loadTrack();
     });
 
