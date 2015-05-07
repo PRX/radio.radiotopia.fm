@@ -177,7 +177,7 @@ $(function () {
 
     $('h1').bind('click', function () {
       ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
-      window.open("http://radiotopia.fm/?utm_source=radio&utm_medium=logo&utm_campaign=radio");
+      window.open("http://radiotopia.fm/?utm_source=radio.radiotopia.fm&utm_medium=Logo&utm_campaign=passive");
     });
 
     $('#outbound-itunes').bind('click', function (e) {
@@ -212,7 +212,7 @@ $(function () {
       if (www) {
         ga('send', 'event', 'outbound', artist, 'WWW');
 
-        window.open(www + '?utm_source=radio&utm_medium=logo&utm_campaign=radio');
+        window.open(www + '?utm_source=radio.radiotopia.fm&utm_medium=logo&utm_campaign=radio');
       }
     });
 
