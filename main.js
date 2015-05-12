@@ -59,6 +59,14 @@ $(function () {
 
     //
     //
+    // Setup
+    //
+    //
+
+    var lastBoundary;
+
+    //
+    //
     // Build playlist
     //
     //
@@ -105,6 +113,7 @@ $(function () {
 
     var loadTrack = function () {
       $('#progress').css('width', 0);
+      lastBoundary = undefined;
 
       if (window.currentTrackURL) {
         var a = $('#audio')[0];
@@ -288,6 +297,19 @@ $(function () {
       var progress = (a.currentTime / a.duration);
 
       $('#progress').css('width', progress * 100 + '%');
+
+      var boundarySpacing = 10;
+
+      var roundedCurrentTime = Math.round(a.currentTime);
+      var isNearBoundary = ((roundedCurrentTime % boundarySpacing) == 0)
+
+      if (isNearBoundary && lastBoundary != roundedCurrentTime) {
+        lastBoundary = roundedCurrentTime;
+
+        // `boundary` is some number of seconds (0, 10, 20, etc) that
+        // approximate how far into a track the user has gotten
+        ga('send', 'event', 'player', 'progress', gaSlug(), { 'metric1': roundedCurrentTime });
+      }
     });
 
     $('#audio').bind('error', function () {
