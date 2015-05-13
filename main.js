@@ -70,6 +70,7 @@ $(function () {
     //
 
     var lastBoundary;
+    var lastPercentage;
 
     //
     //
@@ -120,6 +121,7 @@ $(function () {
     var loadTrack = function () {
       $('#progress').css('width', 0);
       lastBoundary = undefined;
+      lastPercentage = undefined;
 
       if (window.currentTrackURL) {
         var a = $('#audio')[0];
@@ -298,11 +300,24 @@ $(function () {
       loadTrack();
     });
 
+    // Updates the progress bar
+    // Also handles playback tracking analytics. Sends a `Playback Progress`
+    // heartbeat every 10 seconds, with a value of the 10 second block playback
+    // is currently in (eg, "0000 seconds", "0010 seconds"..."0600 seconds").
+    // The values are paddded to make GA sort them in a meaningful way. A
+    // metric value of 10 is also sent with each heartbeat to roughly track
+    // total playback time in GA. Additionally, the percentage of playback
+    // progress is also tracked in 5% increments. 10 seconds represents > 4%
+    // for tracks of 4 minutes or less, so many percentage values would be
+    // missed if the percentage values weren't rounded to the nearest factor of
+    // five. This `Playback Percentage` dimension is only sent when playback
+    // crosses into a new 5% block.
     $('#audio').bind('timeupdate', function () {
       var a = $('#audio')[0];
       var progress = (a.currentTime / a.duration);
+      var percentage = (progress * 100);
 
-      $('#progress').css('width', progress * 100 + '%');
+      $('#progress').css('width', percentage + '%');
 
       var boundarySpacing = 10;
 
@@ -312,10 +327,19 @@ $(function () {
       if (isNearBoundary && lastBoundary != roundedCurrentTime) {
         lastBoundary = roundedCurrentTime;
 
-        var value = padz(roundedCurrentTime, 5) + " seconds"
-        var metric = (roundedCurrentTime == 0 ? 0 : boundarySpacing)
+        var obj = {
+          'dimension2': padz(roundedCurrentTime, 5) + " seconds",
+          'metric2': (roundedCurrentTime == 0 ? 0 : boundarySpacing)
+        };
 
-        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value, 'metric2': metric });
+        var percentTick = padz((Math.round(percentage / 5) * 5), 3) + "%";
+
+        if (lastPercentage != percentTick) {
+          lastPercentage = percentTick;
+          obj['dimension3'] = percentTick;
+        }
+
+        ga('send', 'event', 'player', 'progress', gaSlug(), obj);
       }
     });
 
