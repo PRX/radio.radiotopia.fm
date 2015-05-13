@@ -7,6 +7,12 @@ var gaSlug = function () {
   return slug;
 };
 
+var padz = function (n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
 var linkMap = {
   'Criminal': {
     'iTunes': 'https://itunes.apple.com/us/podcast/criminal/id809264944?at=10l9zE',
@@ -306,11 +312,11 @@ $(function () {
       if (isNearBoundary && lastBoundary != roundedCurrentTime) {
         lastBoundary = roundedCurrentTime;
 
-        var value = roundedCurrentTime + " seconds"
+        var value = padz(roundedCurrentTime, 5) + " seconds"
 
         // `boundary` is some number of seconds (0, 10, 20, etc) that
         // approximate how far into a track the user has gotten
-        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension1': value });
+        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value });
       }
     });
 
