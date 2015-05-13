@@ -313,8 +313,9 @@ $(function () {
         lastBoundary = roundedCurrentTime;
 
         var value = padz(roundedCurrentTime, 5) + " seconds"
+        var metric = (roundedCurrentTime == 0 ? 0 : boundarySpacing)
 
-        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value, 'metric1': roundedCurrentTime });
+        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value, 'metric2': metric });
       }
     });
 
