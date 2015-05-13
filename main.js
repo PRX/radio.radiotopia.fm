@@ -306,9 +306,11 @@ $(function () {
       if (isNearBoundary && lastBoundary != roundedCurrentTime) {
         lastBoundary = roundedCurrentTime;
 
+        var value = roundedCurrentTime + " seconds"
+
         // `boundary` is some number of seconds (0, 10, 20, etc) that
         // approximate how far into a track the user has gotten
-        ga('send', 'event', 'player', 'progress', gaSlug(), { 'metric1': roundedCurrentTime });
+        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension1': value });
       }
     });
 
