@@ -314,9 +314,7 @@ $(function () {
 
         var value = padz(roundedCurrentTime, 5) + " seconds"
 
-        // `boundary` is some number of seconds (0, 10, 20, etc) that
-        // approximate how far into a track the user has gotten
-        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value });
+        ga('send', 'event', 'player', 'progress', gaSlug(), { 'dimension2': value, 'metric1': roundedCurrentTime });
       }
     });
 
