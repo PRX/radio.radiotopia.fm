@@ -7,6 +7,14 @@ var gaSlug = function () {
   return slug;
 };
 
+var gaTitle = function () {
+  return window.currentTrack[1];
+};
+
+var gaArtist = function () {
+  return window.currentTrack[2];
+};
+
 var padz = function (n, width, z) {
   z = z || '0';
   n = n + '';
@@ -108,7 +116,7 @@ $(function () {
       return $.inArray(trackURL, playedTrackURLs) == -1;
     });
 
-    ga('send', 'event', 'app', 'load', 'played tracks', playedTrackURLs.length);
+    ga('send', 'event', 'App', 'Load', 'Played Tracks', playedTrackURLs.length);
     console.log('[Radio] Found ' + newTrackURLs.length + ' new tracks to be played first.')
     console.log('[Radio] Added ' + remainingTrackURLs.length + ' of ' + allTracks.length + ' tracks to playlist.');
 
@@ -186,7 +194,11 @@ $(function () {
       $('h3').text(randomTrack[1]);
       $('h4').text(randomTrack[2]);
 
-      ga('send', 'event', 'player', 'play', gaSlug(), { 'nonInteraction': 1 });
+      ga('send', 'event', 'Player', 'Play', {
+        'dimension1': gaArtist(),
+        'dimension2': gaTitle(),
+        'nonInteraction': 1
+      });
     }
 
     //
@@ -196,7 +208,7 @@ $(function () {
     //
 
     $('h1').bind('click', function () {
-      ga('send', 'event', 'outbound', 'radiotopia.fm', 'WWW');
+      ga('send', 'event', 'Outbound Link', 'radiotopia.fm', 'WWW');
       window.open("http://radiotopia.fm/?utm_source=radio.radiotopia.fm&utm_medium=Logo&utm_campaign=passive");
     });
 
@@ -212,7 +224,7 @@ $(function () {
       var itunes = linkMap[artist]['iTunes'];
 
       if (itunes) {
-        ga('send', 'event', 'outbound', artist, 'iTunes');
+        ga('send', 'event', 'Outbound Link', 'iTunes', { 'dimension1': gaArtist() });
 
         window.open(itunes);
       }
@@ -230,7 +242,7 @@ $(function () {
       var www = linkMap[artist]['www'];
 
       if (www) {
-        ga('send', 'event', 'outbound', artist, 'WWW');
+        ga('send', 'event', 'Outbound Link', 'WWW', { 'dimension1': gaArtist() });
 
         window.open(www + '?utm_source=radio.radiotopia.fm&utm_medium=logo&utm_campaign=radio');
       }
@@ -243,12 +255,12 @@ $(function () {
         a.playbackRate = 2.0;
         $('#speed').text('1x');
 
-        ga('send', 'event', 'player', 'speed', '2x');
+        ga('send', 'event', 'Player', 'Speed', '2x');
       } else {
         a.playbackRate = 1.0;
         $('#speed').text('2x');
 
-        ga('send', 'event', 'player', 'speed', '1x');
+        ga('send', 'event', 'Player', 'Speed', '1x');
       }
     });
 
@@ -256,22 +268,22 @@ $(function () {
       var a = $('#audio')[0]
 
       if (a.paused) {
-        ga('send', 'event', 'player', 'play', gaSlug());
+        ga('send', 'event', 'Player', 'Play', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
         a.play();
       } else {
-        ga('send', 'event', 'player', 'pause', gaSlug());
+        ga('send', 'event', 'Player', 'Pause', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
         a.pause();
       }
     });
 
     $('#skip').bind('click', function () {
-      ga('send', 'event', 'player', 'skip', gaSlug());
+      ga('send', 'event', 'Player', 'Skip', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
 
       loadTrack();
     });
 
     $(document).bind('keydown', 'right', function () {
-      ga('send', 'event', 'player', 'skip', gaSlug());
+      ga('send', 'event', 'Player', 'Skip', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
 
       loadTrack();
     });
@@ -280,10 +292,10 @@ $(function () {
       var a = $('#audio')[0]
 
       if (a.paused) {
-        ga('send', 'event', 'player', 'play', gaSlug());
+        ga('send', 'event', 'Player', 'Play', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
         a.play();
       } else {
-        ga('send', 'event', 'player', 'pause', gaSlug());
+        ga('send', 'event', 'Player', 'Pause', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
         a.pause();
       }
     });
@@ -296,7 +308,7 @@ $(function () {
 
     $('#audio').bind('ended', function () {
       var count = window.playedTrackCount;
-      ga('send', 'event', 'player', 'ended', gaSlug(), count);
+      ga('send', 'event', 'Player', 'Ended', { 'eventValue': count, 'dimension1': gaArtist(), 'dimension2': gaTitle() });
       loadTrack();
     });
 
@@ -328,23 +340,25 @@ $(function () {
         lastBoundary = roundedCurrentTime;
 
         var obj = {
-          'dimension2': padz(roundedCurrentTime, 5) + " seconds",
-          'metric2': (roundedCurrentTime == 0 ? 0 : boundarySpacing)
+          'dimension1': gaArtist(),
+          'dimension2': gaTitle(),
+          'dimension3': padz(roundedCurrentTime, 5) + " seconds",
+          'metric3': (roundedCurrentTime == 0 ? 0 : boundarySpacing)
         };
 
         var percentTick = padz((Math.round(percentage / 5) * 5), 3) + "%";
 
-        if (lastPercentage != percentTick) {
+        if (lastPercentage != percentTick && percentage >= 0) {
           lastPercentage = percentTick;
-          obj['dimension3'] = percentTick;
+          obj['dimension4'] = percentTick;
         }
 
-        ga('send', 'event', 'player', 'progress', gaSlug(), obj);
+        ga('send', 'event', 'Player', 'Progress', obj);
       }
     });
 
     $('#audio').bind('error', function () {
-      ga('send', 'event', 'player', 'error', gaSlug());
+      ga('send', 'event', 'Player', 'Error', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
       loadTrack();
     });
 
