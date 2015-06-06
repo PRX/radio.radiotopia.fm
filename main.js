@@ -83,10 +83,12 @@ $(function () {
     if (!sessionStorage.playCount) { sessionStorage.playCount = 0; }
     if (!sessionStorage.skipCount) { sessionStorage.skipCount = 0; }
     if (!sessionStorage.finishCount) { sessionStorage.finishCount = 0; }
+    if (!sessionStorage.listeningTime) { sessionStorage.listeningTime = 0; }
 
     if (!localStorage.playCount) { localStorage.playCount = 0; }
     if (!localStorage.skipCount) { localStorage.skipCount = 0; }
     if (!localStorage.finishCount) { localStorage.finishCount = 0; }
+    if (!localStorage.listeningTime) { localStorage.listeningTime = 0; }
 
     ga('set', 'dimension6', padz(sessionStorage.skipCount, 5));
 
@@ -369,6 +371,9 @@ $(function () {
 
       if (isNearBoundary && lastBoundary != roundedCurrentTime) {
         lastBoundary = roundedCurrentTime;
+
+        sessionStorage.listeningTime = (parseInt(sessionStorage.listeningTime) + boundarySpacing);
+        localStorage.listeningTime = (parseInt(localStorage.listeningTime) + boundarySpacing);
 
         var obj = {
           'dimension1': gaArtist(),
