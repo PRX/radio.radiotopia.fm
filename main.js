@@ -83,11 +83,13 @@ $(function () {
     if (!sessionStorage.playCount) { sessionStorage.playCount = 0; }
     if (!sessionStorage.skipCount) { sessionStorage.skipCount = 0; }
     if (!sessionStorage.finishCount) { sessionStorage.finishCount = 0; }
+    if (!sessionStorage.hookCount) { sessionStorage.hookCount = 0; }
     if (!sessionStorage.listeningTime) { sessionStorage.listeningTime = 0; }
 
     if (!localStorage.playCount) { localStorage.playCount = 0; }
     if (!localStorage.skipCount) { localStorage.skipCount = 0; }
     if (!localStorage.finishCount) { localStorage.finishCount = 0; }
+    if (!localStorage.hookCount) { localStorage.hookCount = 0; }
     if (!localStorage.listeningTime) { localStorage.listeningTime = 0; }
 
     ga('set', 'dimension6', padz(sessionStorage.skipCount, 5));
@@ -390,6 +392,16 @@ $(function () {
         }
 
         ga('send', 'event', 'Player', 'Progress', obj);
+
+        if (roundedCurrentTime == 60) {
+          sessionStorage.hookCount = (parseInt(sessionStorage.hookCount) + 1);
+          localStorage.hookCount = (parseInt(localStorage.hookCount) + 1);
+
+          //
+          if (parseInt(sessionStorage.hookCount) == 1) {
+            ga('set', 'dimension12', padz(sessionStorage.playCount, 5));
+          }
+        }
       }
     });
 
