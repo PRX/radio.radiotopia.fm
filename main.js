@@ -369,8 +369,10 @@ $(function () {
       var progress = (a.currentTime / a.duration);
       var percentage = (progress * 100);
 
+      // Update progress bar width
       $('#progress').css('width', percentage + '%');
 
+      // Period between heartbeats
       var boundarySpacing = 10;
 
       var roundedCurrentTime = Math.round(a.currentTime);
