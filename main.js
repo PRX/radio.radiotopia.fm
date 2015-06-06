@@ -215,6 +215,11 @@ $(function () {
       $('h3').text(randomTrack[1]);
       $('h4').text(randomTrack[2]);
 
+      if (parseInt(sessionStorage.playCount) == 0) {
+        // Entry show name
+        ga('set', 'dimension11', gaArtist());
+      }
+
       sessionStorage.playCount = (parseInt(sessionStorage.playCount) + 1);
       localStorage.playCount = (parseInt(localStorage.playCount) + 1);
 
