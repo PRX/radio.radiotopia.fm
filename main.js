@@ -92,11 +92,14 @@ $(function () {
     if (!localStorage.hookCount) { localStorage.hookCount = 0; }
     if (!localStorage.listeningTime) { localStorage.listeningTime = 0; }
 
+    // Session Skips
     ga('set', 'dimension6', padz(sessionStorage.skipCount, 5));
 
+    // Session Plays/User Plays
     ga('set', 'dimension7', padz(sessionStorage.playCount, 5));
     ga('set', 'dimension10', padz(localStorage.playCount, 5));
 
+    // Session Completions/User Completions
     ga('set', 'dimension8', padz(sessionStorage.finishCount, 5));
     ga('set', 'dimension9', padz(localStorage.finishCount, 5));
 
@@ -137,6 +140,7 @@ $(function () {
     });
 
     ga('send', 'event', 'App', 'Load');
+    // Session Pre-Plays
     ga('set', 'dimension5', padz(playedTrackURLs.length, 5));
     console.log('[Radio] Found ' + newTrackURLs.length + ' new tracks to be played first.')
     console.log('[Radio] Added ' + remainingTrackURLs.length + ' of ' + allTracks.length + ' tracks to playlist.');
@@ -220,9 +224,13 @@ $(function () {
         ga('set', 'dimension11', gaArtist());
       }
 
+      // Exit show name
+      ga('set', 'dimension13', gaArtist());
+
       sessionStorage.playCount = (parseInt(sessionStorage.playCount) + 1);
       localStorage.playCount = (parseInt(localStorage.playCount) + 1);
 
+      // Re-set play counts after a track loads
       ga('set', 'dimension7', padz(sessionStorage.playCount, 5));
       ga('set', 'dimension10', padz(localStorage.playCount, 5));
 
@@ -305,6 +313,7 @@ $(function () {
       sessionStorage.skipCount = (parseInt(sessionStorage.skipCount) + 1);
       localStorage.skipCount = (parseInt(localStorage.skipCount) + 1);
 
+      // Session Skips
       ga('set', 'dimension6', padz(sessionStorage.skipCount, 5));
       ga('send', 'event', 'Player', 'Skip', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
 
@@ -345,6 +354,7 @@ $(function () {
       sessionStorage.finishCount = (parseInt(sessionStorage.finishCount) + 1);
       localStorage.finishCount = (parseInt(localStorage.finishCount) + 1);
 
+      // Session Completions/User Completions
       ga('set', 'dimension8', padz(sessionStorage.finishCount, 5));
       ga('set', 'dimension9', padz(localStorage.finishCount, 5));
       ga('send', 'event', 'Player', 'Ended', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
