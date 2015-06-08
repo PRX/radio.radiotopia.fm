@@ -66,6 +66,10 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/the-allusionist/id957430475?at=10l9zE',
     'www': 'http://www.theallusionist.org/',
   },
+  'Song Exploder': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/song-exploder/id788236947?at=10l9zE',
+    'www': 'http://songexploder.net/',
+  },
 };
 
 $(function () {
