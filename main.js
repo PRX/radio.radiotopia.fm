@@ -361,7 +361,7 @@ $(function () {
       // Session Completions/User Completions
       ga('set', 'dimension8', padz(sessionStorage.finishCount, 5));
       ga('set', 'dimension9', padz(localStorage.finishCount, 5));
-      ga('send', 'event', 'Player', 'Ended', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
+      ga('send', 'event', 'Player', 'Ended', { 'eventValue': count, 'dimension1': gaArtist(), 'dimension2': gaTitle() });
 
       loadTrack();
     });
