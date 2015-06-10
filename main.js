@@ -136,6 +136,9 @@ $(function () {
       return (pubDate > yesterday) && ($.inArray(track[0], playedTrackURLs) == -1);
     });
 
+    // Track if session loaded 'new' episodes
+    ga('set', 'dimension14', ((newTracks.length > 0) ? 'Premiere' : 'Archive'));
+
     var newTrackURLs = $.map(newTracks, function (track, i) { return track[0] });
 
     // Construct a list of unheard tracks
