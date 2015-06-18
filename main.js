@@ -70,6 +70,10 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/song-exploder/id788236947?at=10l9zE',
     'www': 'http://songexploder.net/',
   },
+  'the memory palace': {
+    'iTunes': 'http://itunes.apple.com/podcast/the-memory-palace/id299436963?at=10l9zE',
+    'www': 'http://thememorypalace.us/',
+  },
 };
 
 $(function () {
