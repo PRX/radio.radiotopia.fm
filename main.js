@@ -267,8 +267,6 @@ $(function () {
 
       ga('send', 'event', 'Player', 'Load', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
       ga('send', 'event', 'Player', 'Play', { 'dimension1': gaArtist(), 'dimension2': gaTitle() });
-
-
     }
 
     //
