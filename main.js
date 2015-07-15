@@ -22,6 +22,7 @@ $zopim(function () {
   // When the chat starts, reset the callback to add now playing to notes
   $zopim.livechat.setOnChatStart(function () {
     addZopimNowListeningNote = function () {
+      console.log("Setting Zopim Notes");
       $zopim.livechat.appendNotes("[NowPlaying] " + gaSlug() + "\n");
     };
 
