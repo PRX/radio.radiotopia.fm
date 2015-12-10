@@ -93,7 +93,7 @@ var linkMap = {
 };
 
 $(function () {
-  var url = $('body').data('data-tower-url')
+  var url = $('body').data('tower-url');
   $.get(url, function(data) {
 
     //
