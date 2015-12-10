@@ -93,7 +93,8 @@ var linkMap = {
 };
 
 $(function () {
-  $.get('http://tower.radiotopia.fm/enclosures/list', function(data) {
+  var url = $('body').data('data-tower-url')
+  $.get(url, function(data) {
 
     //
     //
