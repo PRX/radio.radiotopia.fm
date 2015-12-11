@@ -372,6 +372,7 @@ $(function () {
 
     $('#playpause').bind('click', function () { doPlayPause(); });
     $(document).bind('keydown', 'space', function () { doPlayPause(); });
+    $(document).bind('keydown', 'k', function () { doPlayPause(); });
 
     //
     //
