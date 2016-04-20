@@ -114,7 +114,8 @@ h3 {
   padding: 10px 0 0;
 }
 
-#outbound a {
+#outbound a,
+#apps a {
   text-decoration: none;
   color: inherit;
   display: inline-block;
@@ -163,7 +164,7 @@ audio {
 }
 
 @media only screen and (max-width: 450px) {
-  #outbound { display: none; }
+  #outbound, #apps { display: none; }
 }
 
 @media only screen and (max-width: 320px) {
