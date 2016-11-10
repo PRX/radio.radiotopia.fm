@@ -277,7 +277,7 @@ $(function () {
 
     $('h1').bind('click', function () {
       ga('send', 'event', 'Outbound Link', 'radiotopia.fm', 'WWW');
-      window.open("http://radiotopia.fm/?utm_source=radio.radiotopia.fm&utm_medium=Logo&utm_campaign=passive");
+      window.open("https://www.radiotopia.fm/?utm_source=radio.radiotopia.fm&utm_medium=Logo&utm_campaign=passive");
     });
 
     $('#outbound-itunes').bind('click', function (e) {
