@@ -15,21 +15,21 @@ var gaArtist = function () {
   return window.currentTrack[2];
 };
 
-// noop until the chat has started
-var addZopimNowListeningNote = function () {};
-
-$zopim(function () {
-  // When the chat starts, reset the callback to add now playing to notes
-  $zopim.livechat.setOnChatStart(function () {
-    addZopimNowListeningNote = function () {
-      console.log("Setting Zopim Notes");
-      $zopim.livechat.appendNotes("[NowPlaying] " + gaSlug() + "\n");
-    };
-
-    // add immediately.
-    addZopimNowListeningNote();
-  });
-});
+// // noop until the chat has started
+// var addZopimNowListeningNote = function () {};
+//
+// $zopim(function () {
+//   // When the chat starts, reset the callback to add now playing to notes
+//   $zopim.livechat.setOnChatStart(function () {
+//     addZopimNowListeningNote = function () {
+//       console.log("Setting Zopim Notes");
+//       $zopim.livechat.appendNotes("[NowPlaying] " + gaSlug() + "\n");
+//     };
+//
+//     // add immediately.
+//     addZopimNowListeningNote();
+//   });
+// });
 
 var padz = function (n, width, z) {
   z = z || '0';
@@ -256,7 +256,7 @@ $(function () {
       ga('set', 'dimension13', gaArtist());
 
       // Zopim information
-      addZopimNowListeningNote();
+      // addZopimNowListeningNote();
 
       sessionStorage.playCount = (parseInt(sessionStorage.playCount) + 1);
       localStorage.playCount = (parseInt(localStorage.playCount) + 1);
