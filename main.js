@@ -90,6 +90,18 @@ var linkMap = {
     'iTunes': 'http://itunes.apple.com/podcast/the-memory-palace/id299436963?at=10l9zE',
     'www': 'http://thememorypalace.us/',
   },
+  'Millennial': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/millennial/id961509999?at=10l9zE',
+    'www': 'http://www.millennialpodcast.org/',
+  },
+  'The West Wing Weekly': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-west-wing-weekly/id1093364587?at=10l9zE',
+    'www': 'http://thewestwingweekly.com/',
+  },
+  'The Bugle': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-bugle/id265799883?at=10l9zE',
+    'www': 'http://thebuglepodcast.com/',
+  },
 };
 
 $(function () {
