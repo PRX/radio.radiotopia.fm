@@ -56,7 +56,7 @@ h1 {
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  background-image: url('/wordmark.png');
+  background-image: url('/wordmark.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
