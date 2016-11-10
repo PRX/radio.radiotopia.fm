@@ -108,6 +108,7 @@ h3 {
   cursor: pointer;
   z-index: 50;
   position: relative;
+  outline: none;
 }
 
 #playpause {
