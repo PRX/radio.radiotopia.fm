@@ -461,13 +461,12 @@ $(function () {
 
     $('#audio').bind('pause play', function () {
       $('#playpause').removeClass();
-      $('#playpause').addClass('fa');
 
       var a = $('#audio')[0];
       if (a.paused) {
-        $('#playpause').addClass('fa-play');
+        $('#playpause').addClass('play');
       } else {
-        $('#playpause').addClass('fa-pause');
+        $('#playpause').addClass('pause');
       }
     });
 
