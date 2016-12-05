@@ -1,0 +1,11 @@
+version: 0.1
+environment_variables:
+  plaintext:
+phases:
+  build:
+    commands:
+      - aws s3 sync . s3://111temprx --acl private --region us-east-1 --delete --exclude ".git/*"
+artifacts:
+  type: zip
+  files:
+    - foo.zip
