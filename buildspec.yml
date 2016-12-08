@@ -2,10 +2,19 @@ version: 0.1
 environment_variables:
   plaintext:
 phases:
+  install:
+    commands:
+      - echo Install phase `date`
+  pre_build:
+    commands:
+      - echo Pre-build phase `date`
   build:
     commands:
+      - echo Build phase `date`
       - aws s3 sync . s3://111temprx --acl private --region us-east-1 --delete --exclude ".git/*"
+  post_build:
+    commands:
+      - echo Post-build phase `date`
 artifacts:
-  type: zip
   files:
-    - foo.zip
+    - index.html
