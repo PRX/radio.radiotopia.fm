@@ -13,7 +13,3 @@ phases:
 artifacts:
   files:
     - index.html
-
-
-
-curl -X POST --data-urlencode "payload={\"channel\": \"#ops-debug\", \"text\": \"radio.radiotopia.fm – Starting S3 sync to bucket: $STATIC_SITE_BUCKET\"}" $SLACK_WEBHOOK_URL
