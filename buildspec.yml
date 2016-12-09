@@ -2,7 +2,7 @@ version: 0.1
 phases:
   pre_build:
     commands:
-      - curl -X POST --data-urlencode 'payload={"channel": "#ops-debug", "text": "lorem"}' $SLACK_WEBHOOK_URL
+      - "curl -X POST --data-urlencode 'payload={\"channel\": \"#ops-debug\", \"text\": \"lorem\"}' $SLACK_WEBHOOK_URL"
   build:
     commands:
       - echo Starting S3 sync to $STATIC_SITE_BUCKET
