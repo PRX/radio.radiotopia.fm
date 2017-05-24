@@ -7,10 +7,10 @@
 body {
   color: white;
   background-color: black;
-  background-image: url('/stars.png'), url('/grad.png');
+  background-image: url('/stars.png'), url('/grad.svg');
   background-position: top left, left bottom;
   background-repeat: repeat, repeat-x;
-  background-size: 50% 50%, auto, auto;
+  background-size: 50% 50%, contain;
   width: 100vw;
   height: 100vh;
   -webkit-user-select: none;
