@@ -92,6 +92,19 @@ h3 {
   padding: 25px 0;
 }
 
+h3 span {
+  display: block;
+  background: #F9A052;
+  padding: 1px 5px;
+  text-transform: uppercase;
+  margin-right: 11px;
+  font-size: 13px;
+  border-radius: 3px;
+  float: left;
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+}
+
 #controls {
   padding: 25px 0 0;
 }

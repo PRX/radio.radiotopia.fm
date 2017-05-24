@@ -256,9 +256,15 @@ $(function () {
 
       window.playedTrackCount = playedTrackURLs.length;
 
+      var titleText = randomTrack.title;
+
+      if (Date.parse(randomTrack.date) > yesterday) {
+        titleText = "<span>New!</span>" + titleText;
+      }
+
       $('#audio').attr('src', randomTrack.audioURL);
       $('#audio')[0].play();
-      $('h3').text(randomTrack.title);
+      $('h3').html(titleText);
       $('h4').text(randomTrack.show);
 
       if (parseInt(sessionStorage.playCount) == 0) {
