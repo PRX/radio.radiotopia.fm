@@ -167,7 +167,7 @@ $(function () {
 
     // Make a separate list of unheard tracks from the last two days
     var newTracks = $.grep(allTracks, function (track, i) {
-      var pubDate = Date.parse(track.date);
+      var pubDate = Date.parse(track.date.replace(' UTC', '').replace(' ', 'T'));
       return (pubDate > yesterday) && ($.inArray(track.audioURL, playedTrackURLs) == -1);
     });
 
@@ -258,7 +258,7 @@ $(function () {
 
       var titleText = randomTrack.title;
 
-      if (Date.parse(randomTrack.date) > yesterday) {
+      if (Date.parse(randomTrack.date.replace(' UTC', '').replace(' ', 'T')) > yesterday) {
         titleText = "<span>New!</span>" + titleText;
       }
 
