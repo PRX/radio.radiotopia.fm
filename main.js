@@ -1,3 +1,5 @@
+var NEW_PERIOD = 7;
+
 var gaSlug = function () {
   var title = window.currentTrack.title;
   var artist = window.currentTrack.show;
@@ -161,7 +163,7 @@ $(function () {
 
     // Get any tracks from the last couple of days
     var now = Date.now();
-    var yesterday = now - (2 * 24 * 60 * 60 * 1000);
+    var yesterday = now - (NEW_PERIOD * 24 * 60 * 60 * 1000);
 
     // Make a separate list of unheard tracks from the last two days
     var newTracks = $.grep(allTracks, function (track, i) {
