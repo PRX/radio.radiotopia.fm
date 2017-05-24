@@ -1,6 +1,6 @@
 var gaSlug = function () {
-  var title = window.currentTrack[1];
-  var artist = window.currentTrack[2];
+  var title = window.currentTrack.title;
+  var artist = window.currentTrack.show;
 
   var slug = artist + ' - ' + title;
 
@@ -8,11 +8,11 @@ var gaSlug = function () {
 };
 
 var gaTitle = function () {
-  return window.currentTrack[1];
+  return window.currentTrack.title;
 };
 
 var gaArtist = function () {
-  return window.currentTrack[2];
+  return window.currentTrack.show;
 };
 
 // // noop until the chat has started
@@ -149,7 +149,7 @@ $(function () {
     var allTracks = data;
 
     var dup = allTracks.slice(0);
-    var allTrackURLs = $.map(dup, function (track, i) { return track[0] });
+    var allTrackURLs = $.map(dup, function (track, i) { return track.audioURL });
 
     if (!localStorage.playedTrackURLs) {
       localStorage.playedTrackURLs = JSON.stringify([]);
@@ -165,14 +165,14 @@ $(function () {
 
     // Make a separate list of unheard tracks from the last two days
     var newTracks = $.grep(allTracks, function (track, i) {
-      var pubDate = Date.parse(track[3]);
-      return (pubDate > yesterday) && ($.inArray(track[0], playedTrackURLs) == -1);
+      var pubDate = Date.parse(track.date);
+      return (pubDate > yesterday) && ($.inArray(track.audioURL, playedTrackURLs) == -1);
     });
 
     // Track if session loaded 'new' episodes
     ga('set', 'dimension14', ((newTracks.length > 0) ? 'Premiere' : 'Archive'));
 
-    var newTrackURLs = $.map(newTracks, function (track, i) { return track[0] });
+    var newTrackURLs = $.map(newTracks, function (track, i) { return track.audioURL });
 
     // Construct a list of unheard tracks
     var remainingTrackURLs = $.grep(allTrackURLs, function (trackURL, i) {
@@ -247,17 +247,17 @@ $(function () {
 
       // Find the track from its URL
       var randomTrack = $.grep(allTracks, function (track, i) {
-        return track[0] == randomTrackURL;
+        return track.audioURL == randomTrackURL;
       })[0];
 
       window.currentTrack = randomTrack;
 
       window.playedTrackCount = playedTrackURLs.length;
 
-      $('#audio').attr('src', randomTrack[0]);
+      $('#audio').attr('src', randomTrack.audioURL);
       $('#audio')[0].play();
-      $('h3').text(randomTrack[1]);
-      $('h4').text(randomTrack[2]);
+      $('h3').text(randomTrack.title);
+      $('h4').text(randomTrack.show);
 
       if (parseInt(sessionStorage.playCount) == 0) {
         // Entry show name
@@ -295,7 +295,7 @@ $(function () {
     $('#outbound-itunes').bind('click', function (e) {
       e.preventDefault();
 
-      var artist = window.currentTrack[2];
+      var artist = window.currentTrack.show;
 
       if (artist.indexOf('Theory of Everything') != -1) {
         artist = 'Theory of Everything';
@@ -313,7 +313,7 @@ $(function () {
     $('#outbound-www').bind('click', function (e) {
       e.preventDefault();
 
-      var artist = window.currentTrack[2];
+      var artist = window.currentTrack.show;
 
       if (artist.indexOf('Theory of Everything') != -1) {
         artist = 'Theory of Everything';
