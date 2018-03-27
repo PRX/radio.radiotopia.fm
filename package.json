@@ -1,0 +1,23 @@
+{
+  "name": "radio.radiotopia.fm",
+  "version": "1.0.0",
+  "description": "Radiotopia Radio",
+  "scripts": {
+    "test": "",
+    "build": "npm run build-sync && npm run build-zip",
+    "build-sync": "rsync -crl --delete --exclude-from .s3staticignore . build && ls build",
+    "build-zip": "rm -f build.zip && cd build && mkdir -p /.prxci && zip -rq /.prxci/build.zip ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRX/radio.radiotopia.fm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PRX/radio.radiotopia.fm/issues"
+  },
+  "homepage": "https://github.com/PRX/radio.radiotopia.fm",
+  "dependencies": {}
+}
