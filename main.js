@@ -485,8 +485,10 @@ $(function () {
       var a = $('#audio')[0];
       if (a.paused) {
         $('#playpause').addClass('play');
+        $('#playpause').attr('aria-label', 'play');
       } else {
         $('#playpause').addClass('pause');
+        $('#playpause').attr('aria-label', 'pause');
       }
     });
 
