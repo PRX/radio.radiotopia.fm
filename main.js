@@ -104,6 +104,22 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/the-bugle/id265799883?at=10l9zE',
     'www': 'http://thebuglepodcast.com/',
   },
+  'ZigZag': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/zigzag/id1385700943?mt=2',
+    'www': 'http://www.zigzagpod.com/',
+  },
+  'Everything is Alive': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
+    'www': 'http://www.everythingisalive.com/',
+  },
+  'Adult ISH': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
+    'www': 'http://yr.media/podcasts/adult-ish-podcast',
+  },
+  'Passenger List': {
+    'iTunes': 'https://podcasts.apple.com/us/podcast/passenger-list/id1472392291',
+    'www': 'https://www.passengerlist.org/',
+  },
 };
 
 $(function () {
