@@ -40,53 +40,41 @@ var padz = function (n, width, z) {
 }
 
 var linkMap = {
-  'Criminal': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/criminal/id809264944?at=10l9zE',
-    'www': 'http://thisiscriminal.com/',
-  },
-  'The Truth': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/the-truth/id502304410?at=10l9zE',
-    'www': 'http://thetruthpodcast.com/',
-  },
-  'The Mortified Podcast': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/the-mortified-podcast/id964902342?at=10l9zE',
-    'www': 'http://getmortified.com/',
-  },
-  'The Heart': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/audio-smut/id595892633?at=10l9zE',
-    'www': 'http://theheartradio.org/',
-  },
-  'Fugitive Waves': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/fugitive-waves/id814067846?at=10l9zE',
-    'www': 'http://www.kitchensisters.org/',
-  },
-  'Love + Radio': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/love-+-radio/id84389707?at=10l9zE',
-    'www': 'http://loveandradio.org/',
-  },
   '99% Invisible': {
     'iTunes': 'https://itunes.apple.com/us/podcast/99-invisible/id394775318?at=10l9zE',
     'www': 'http://99percentinvisible.org/',
   },
-  'Strangers': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/strangers/id490297492?at=10l9zE',
-    'www': 'http://storycentral.org/',
-  },
-  'Radio Diaries': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/npr-radio-diaries-podcast/id207505466?at=10l9zE',
-    'www': 'http://www.radiodiaries.org/',
-  },
-  "Theory of Everything": {
-    'iTunes': 'https://itunes.apple.com/us/podcast/benjamen-walkers-theory-everything/id646537599?at=10l9zE',
-    'www': 'http://toe.prx.org/',
+  'Adult ISH': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
+    'www': 'http://yr.media/podcasts/adult-ish-podcast',
   },
   'The Allusionist': {
     'iTunes': 'https://itunes.apple.com/us/podcast/the-allusionist/id957430475?at=10l9zE',
     'www': 'http://www.theallusionist.org/',
   },
-  'Song Exploder': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/song-exploder/id788236947?at=10l9zE',
-    'www': 'http://songexploder.net/',
+  'Criminal': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/criminal/id809264944?at=10l9zE',
+    'www': 'http://thisiscriminal.com/',
+  },
+  'Ear Hustle': {
+    'iTunes': 'http://itunes.apple.com/us/podcast/ear-hustle/id1240841298',
+    'www': 'https://earhustlesq.com/',
+  },
+  'Everything is Alive': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
+    'www': 'http://www.everythingisalive.com/',
+  },
+  'The Heart': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/audio-smut/id595892633?at=10l9zE',
+    'www': 'http://theheartradio.org/',
+  },
+  'The Kitchen Sisters Present': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/fugitive-waves/id814067846?at=10l9zE',
+    'www': 'http://www.kitchensisters.org/',
+  },
+  'Over the Road': {
+    'iTunes': 'https://podcasts.apple.com/us/podcast/over-the-road/id1472401495',
+    'www': 'https://www.overtheroad.fm/',
   },
   'the memory palace': {
     'iTunes': 'http://itunes.apple.com/podcast/the-memory-palace/id299436963?at=10l9zE',
@@ -96,29 +84,53 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/millennial/id961509999?at=10l9zE',
     'www': 'http://www.millennialpodcast.org/',
   },
-  'The West Wing Weekly': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/the-west-wing-weekly/id1093364587?at=10l9zE',
-    'www': 'http://thewestwingweekly.com/',
+  'The Mortified Podcast': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-mortified-podcast/id964902342?at=10l9zE',
+    'www': 'http://getmortified.com/',
   },
-  'The Bugle': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/the-bugle/id265799883?at=10l9zE',
-    'www': 'http://thebuglepodcast.com/',
-  },
-  'ZigZag': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/zigzag/id1385700943?mt=2',
-    'www': 'http://www.zigzagpod.com/',
-  },
-  'Everything is Alive': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
-    'www': 'http://www.everythingisalive.com/',
-  },
-  'Adult ISH': {
-    'iTunes': 'https://itunes.apple.com/us/podcast/everything-is-alive/id1388419519',
-    'www': 'http://yr.media/podcasts/adult-ish-podcast',
+  'Partners': {
+    'iTunes': 'https://podcasts.apple.com/us/podcast/partners/id1494790308',
+    'www': 'https://partners.show/',
   },
   'Passenger List': {
     'iTunes': 'https://podcasts.apple.com/us/podcast/passenger-list/id1472392291',
     'www': 'https://www.passengerlist.org/',
+  },
+  'Radio Diaries': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/npr-radio-diaries-podcast/id207505466?at=10l9zE',
+    'www': 'http://www.radiodiaries.org/',
+  },
+  'Radiotopia Plus': {
+    'iTunes': 'https://plus.radiotopia.fm/',
+    'www': 'https://plus.radiotopia.fm/',
+  },
+  'Showcase from Radiotopia': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/showcase-from-radiotopia/id1260747339',
+    'www': 'https://www.radiotopia.fm/showcase',
+  },
+  'Song Exploder': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/song-exploder/id788236947?at=10l9zE',
+    'www': 'http://songexploder.net/',
+  },
+  'This is Love': {
+    'iTunes': 'http://itunes.apple.com/us/podcast/this-is-love/id1337100398?mt=2',
+    'www': 'http://thisislovepodcast.com/',
+  },
+  "Theory of Everything": {
+    'iTunes': 'https://itunes.apple.com/us/podcast/benjamen-walkers-theory-everything/id646537599?at=10l9zE',
+    'www': 'http://toe.prx.org/',
+  },
+  'The Truth': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-truth/id502304410?at=10l9zE',
+    'www': 'http://thetruthpodcast.com/',
+  },
+  'The West Wing Weekly': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/the-west-wing-weekly/id1093364587?at=10l9zE',
+    'www': 'http://thewestwingweekly.com/',
+  },
+  'What Trump Can Teach Us About Con Law': {
+    'iTunes': 'https://itunes.apple.com/us/podcast/what-trump-can-teach-us-about-con-law/id1242537529?mt=2',
+    'www': 'http://trumpconlaw.com/',
   },
 };
 
