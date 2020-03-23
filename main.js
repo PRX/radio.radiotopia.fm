@@ -112,6 +112,10 @@ var linkMap = {
     'iTunes': 'https://itunes.apple.com/us/podcast/song-exploder/id788236947?at=10l9zE',
     'www': 'http://songexploder.net/',
   },
+  'This Day In Esoteric Political History': {
+    'iTunes': 'https://podcasts.apple.com/us/podcast/this-day-in-esoteric-election-history/id1502728938',
+    'www': 'http://thisdaypod.com/',
+  },
   'This is Love': {
     'iTunes': 'http://itunes.apple.com/us/podcast/this-is-love/id1337100398?mt=2',
     'www': 'http://thisislovepodcast.com/',
